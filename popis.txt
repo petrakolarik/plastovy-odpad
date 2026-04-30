@@ -1,0 +1,115 @@
+HTML 3 - PRVKY KOMUNIKÁCIE
+Termín odovzdania: Dnes o 23:59
+
+===================================
+AUTOR/AUTORKA:
+===================================
+Petra Kolarik (pracuje SAMOSTATNE - bez spoluprispievajúcich)
+
+===================================
+FUNKČNÝ ODKAZ NA WEB-STRÁNKU:
+===================================
+Súbor: index.html
+Téma: "Spracovanie plastového odpadu v Malackách v roku 2025"
+
+===================================
+PRVKY KOMUNIKÁCIE NA WEB-STRÁNKE:
+===================================
+
+Web-stránka obsahuje NEINTERAKTÍVNY nástroj na komunikáciu:
+
+1) CHAT OKIENKO (Floating Chat Box) 💬
+   - Umiestnené v pravom dolnom rohu
+   - Vždy viditeľné bez ohľadu na akú stránku si
+   - Možnosť minimalizácie (zatvorenie)
+   
+   FUNKCIE CHATU:
+   - Úvodná správa chatbota
+   - Zadávanie správ používateľa
+   - Automatické odpovede na otázky
+   - Animované zobrazenie správ
+   - Skrolovateľný history správ
+   - Responzívny dizajn
+   
+   CHATBOT ODPOVEDÁ NA:
+   - "plast" → Info o plastickom odpade
+   - "recyklácia" → Info o recyklácii
+   - "malacky" → Info o Malackách
+   - "autorka" → Info o Petre Kolarik
+   - "ako" → Ako sa zapojiť
+   - "kontakt" → Info o kontakte
+   - A mnohé ďalšie...
+
+2) KONTAKTNÝ FORMULÁR - Stránka "Kontakt"
+   - Vstupné pole pre meno
+   - Vstupné pole pre e-mail
+   - Vstupné pole pre tému
+   - Textové pole pre správu (textarea)
+   - Tlačidlo "Odoslať správu"
+   - Potvrdenie o odoslaní správy (success message)
+
+FUNKCIE FORMULÁRA:
+- Validácia všetkých polí (všetky sú povinné)
+- Overenie správneho e-mailovej adresy
+- Potvrdenie o úspechu po odoslaní
+- Automatické vyčistenie formulára
+- Bezpečné spracovanie údajov
+
+===================================
+PODSTRÁNKY WEBOVEJ STRÁNKY:
+===================================
+
+1) DOMOV
+   - Úvod a popis projektu
+   - Informácia o autorke: Petra Kolarik
+   - Vysvetlenie dôležitosti problému
+
+2) PROBLÉM
+   - Štatistiky o plastovom odpade
+   - Analýza problémov
+   - Dopad na životné prostredie
+   - 850 ton plastového odpadu ročne
+
+3) RIEŠENIE
+   - Možné riešenia
+   - Ciele do roku 2025
+   - Ako sa jednotlivci môžu zapojiť
+   - Úloha mestnej samosprávy
+
+4) KONTAKT (NOVÝ - obsahuje neinteraktívnu komunikáciu)
+   - Kontaktný formulár
+   - Možnosti zapojenia sa
+   - Kontaktné informácie
+   - Pozvanie na komunikáciu
+
+===================================
+TECHNICKÉ PARAMETRE:
+===================================
+- HTML5 Markup
+- CSS3 Styling
+- JavaScript pre interakciu formulára
+- Responzívny dizajn
+- Validácia formulára
+- Bez použitia externých knižníc
+
+===================================
+POKYNY NA POUŽÍVANIE:
+===================================
+1. Otvoriť index.html v prehliadači
+2. Prejsť na stránku "Kontakt" v menu
+3. Vyplniť kontaktný formulár:
+   - Meno (povinné)
+   - E-mail (povinné)
+   - Téma (povinná)
+   - Správa (povinná)
+4. Kliknúť na "Odoslať správu"
+5. Появí sa potvrdenie o úspešnom odoslaní
+
+===================================
+SÚČASŤ PROJEKTU:
+===================================
+- index.html (web-stránka s komunikačným nástrojom)
+- popis.txt (tento súbor s dokumentáciou)
+
+Všetky súbory sú funkčné a offline bez internetu.
+Stránka je pripravená na odovzdanie.

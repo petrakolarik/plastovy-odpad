@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plastový odpad v Malackách - Informačný portál</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f4;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+        
+        nav {
+            background-color: #27ae60;
+            padding: 0;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        nav a {
+            display: inline-block;
+            color: white;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            font-weight: 500;
+        }
+        
+        nav a:hover {
+            background-color: #1e8449;
+        }
+        
+        nav a.active {
+            background-color: #1e8449;
+            border-bottom: 3px solid #f39c12;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
+        .content-section {
+            background: white;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: none;
+        }
+        
+        .content-section.active {
+            display: block;
+        }
+        
+        h2 {
+            color: #27ae60;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+            border-bottom: 3px solid #2ecc71;
+            padding-bottom: 0.5rem;
+        }
+        
+        h3 {
+            color: #2ecc71;
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+            font-size: 1.3rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+        
+        ul, ol {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .info-box {
+            background-color: #e8f8f5;
+            border-left: 4px solid #2ecc71;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+        
+        .info-box strong {
+            color: #27ae60;
+        }
+        
+        .statistics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .stat-card .number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-card .label {
+            font-size: 0.9rem;
+            opacity: 0.95;
+        }
+        
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+        
+        footer p {
+            margin-bottom: 0.5rem;
+        }
+        
+        .author-info {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+            
+            nav a {
+                display: block;
+                padding: 0.8rem;
+            }
+            
+            .statistics {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #27ae60;
+            font-weight: 500;
+        }
+        
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #bdc3c7;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+        
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #2ecc71;
+            box-shadow: 0 0 5px rgba(46, 204, 113, 0.3);
+        }
+        
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        button {
+            background-color: #2ecc71;
+            color: white;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-weight: 500;
+        }
+        
+        button:hover {
+            background-color: #27ae60;
+        }
+        
+        .success-message {
+            background-color: #d5f4e6;
+            color: #27ae60;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+        
+        .success-message.show {
+            display: block;
+        }
+        
+        /* Chat Box Styles */
+        .chat-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 350px;
+            height: auto;
+            max-height: 500px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 40px rgba(0, 0, 0, 0.16);
+            display: flex;
+            flex-direction: column;
+            z-index: 1000;
+            font-family: inherit;
+        }
+        
+        .chat-container.closed {
+            width: auto;
+            height: auto;
+            max-height: none;
+        }
+        
+        .chat-header {
+            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+            color: white;
+            padding: 1rem;
+            border-radius: 12px 12px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .chat-header h3 {
+            margin: 0;
+            font-size: 1.1rem;
+            border: none;
+            padding: 0;
+            color: white;
+        }
+        
+        .chat-close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem;
+            height: 300px;
+            border-bottom: 1px solid #ecf0f1;
+        }
+        
+        .message {
+            margin-bottom: 1rem;
+            display: flex;
+            animation: slideIn 0.3s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .message.bot {
+            justify-content: flex-start;
+        }
+        
+        .message.user {
+            justify-content: flex-end;
+        }
+        
+        .message-content {
+            max-width: 80%;
+            padding: 0.8rem;
+            border-radius: 8px;
+            word-wrap: break-word;
+        }
+        
+        .message.bot .message-content {
+            background-color: #ecf0f1;
+            color: #333;
+        }
+        
+        .message.user .message-content {
+            background-color: #2ecc71;
+            color: white;
+        }
+        
+        .chat-input-area {
+            padding: 1rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .chat-input {
+            flex: 1;
+            padding: 0.7rem;
+            border: 1px solid #bdc3c7;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            font-family: inherit;
+        }
+        
+        .chat-input:focus {
+            outline: none;
+            border-color: #2ecc71;
+            box-shadow: 0 0 5px rgba(46, 204, 113, 0.3);
+        }
+        
+        .chat-send-btn {
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .chat-send-btn:hover {
+            background-color: #27ae60;
+        }
+        
+        .chat-container.closed .chat-messages,
+        .chat-container.closed .chat-input-area {
+            display: none;
+        }
+        
+        @media (max-width: 480px) {
+            .chat-container {
+                width: 280px;
+                bottom: 10px;
+                right: 10px;
+            }
+            
+            .message-content {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🌍 Plastový odpad v Malackách</h1>
+        <p>Informačný portál o spracovaní plastového odpadu v roku 2025</p>
+    </header>
+    
+    <nav>
+        <a href="#" onclick="showSection('home')" class="nav-link active" data-section="home">Domov</a>
+        <a href="#" onclick="showSection('problem')" class="nav-link" data-section="problem">Problém</a>
+        <a href="#" onclick="showSection('resenie')" class="nav-link" data-section="resenie">Riešenie</a>
+        <a href="#" onclick="showSection('kontakt')" class="nav-link" data-section="kontakt">Kontakt</a>
+    </nav>
+    
+    <div class="container">
+        <!-- Domov -->
+        <div id="home" class="content-section active">
+            <h2>Domovská stránka</h2>
+            
+            <p>Vítame vás na informačnom portáli venovanom spracovaniu plastového odpadu v Malackách. Táto webová stránka vám poskytne komplexný prehľad o súčasnej situácii, výzvach a riešeniach súvisiacich s plastovým odpadom v našej komunite.</p>
+            
+            <div class="info-box">
+                <strong>O tomto projekte:</strong> Tento portál je vytvorený ako školský projekt v rámci predmetu HTML 3. Cieľom je zvýšiť povedomie o environmentálnych problémoch spojených s plastovým odpadom.
+            </div>
+            
+            <h3>Čo vás čaká?</h3>
+            <ul>
+                <li><strong>Problém:</strong> Podrobné informácie o rozsahu problému plastového odpadu v Malackách</li>
+                <li><strong>Riešenie:</strong> Praktické kroky a iniciatívy na zlepšenie situácie</li>
+            </ul>
+            
+            <div class="author-info">
+                <strong>Autor webovej stránky:</strong> Petra Kolarik
+            </div>
+            
+            <h3>Prečo je to dôležité?</h3>
+            <p>Plastový odpad predstavuje jednu z najväčších environmentálnych výziev 21. storočia. Správne spracovanie a recyklácia plastov sú kľúčové pre udržateľný rozvoj našich komunít.</p>
+        </div>
+        
+        <!-- Problém -->
+        <div id="problem" class="content-section">
+            <h2>Problém plastového odpadu</h2>
+            
+            <p>Plastový odpad v Malackách predstavuje rastúci ekologický problém. Vysoký objem plastového odpadu, ktorý sa vyprodukuje ročne, je veľkou záťažou pre miestne skládky a životné prostredie.</p>
+            
+            <h3>Štatistika odpadu v Malackách</h3>
+            <div class="statistics">
+                <div class="stat-card">
+                    <div class="number">850</div>
+                    <div class="label">ton plastového odpadu ročne</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">35%</div>
+                    <div class="label">z toho sa recykluje</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">65%</div>
+                    <div class="label">končí na skládkach</div>
+                </div>
+            </div>
+            
+            <h3>Hlavné problémy</h3>
+            <ol>
+                <li><strong>Nedostatočná recyklácia:</strong> Veľké množstvo plastov sa nevhodne likviduje</li>
+                <li><strong>Znečistenie podzemných vôd:</strong> Rozkladajúci sa plast kontaminuje vodu</li>
+                <li><strong>Problémy s odpadom:</strong> Plast sa rozkladá desiatky rokov</li>
+                <li><strong>Nedostatočné povedomie:</strong> Návštevníci mesta nie sú dostatočne informovaní</li>
+                <li><strong>Chýbajúca infraštruktúra:</strong> Nie je dostatok zberných miest a recyklačných centier</li>
+            </ol>
+            
+            <div class="info-box">
+                <strong>Zaujímavý fakt:</strong> Plastová fľaša sa v prírode rozkladá približne 500 rokov. Recyklácia plastov môže tento čas skrátiť na desiatky rokov.
+            </div>
+            
+            <h3>Dopad na životné prostredie</h3>
+            <p>Plastový odpad negatívne ovplyvňuje ekosystémy, ohrozovania zem, vode aj vzduchu. Mikroplasty sa dostávajú do potravného reťazca a ovplyvňujú živočíchy aj ľudí.</p>
+        </div>
+        
+        <!-- Riešenie -->
+        <div id="resenie" class="content-section">
+            <h2>Možné riešenia a iniciatívy</h2>
+            
+            <p>Napriek serióznosť problému existujú viacerí spôsoby, ako zlepšiť situáciu. Kombinácia edukácie, infraštruktúry a spoločenského zapojenia je kľúčová.</p>
+            
+            <h3>Proposed Solutions</h3>
+            <ul>
+                <li><strong>Zvýšenie vedomia:</strong> Vzdelávacie kampane v školách a komunite</li>
+                <li><strong>Lepšia separácia odpadu:</strong> Zavedenie lepšieho systému triedenia odpadu</li>
+                <li><strong>Rozšírenie recyklácie:</strong> Budovanie nových recyklačných centier</li>
+                <li><strong>Obmedzenie plastov:</strong> Podpora používania ekologických alternatív</li>
+                <li><strong>Komunitné čistenie:</strong> Organizovanie akcií na čistenie mesta</li>
+            </ul>
+            
+            <div class="statistics">
+                <div class="stat-card">
+                    <div class="number">5</div>
+                    <div class="label">nových zberných miest v pláne</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">12</div>
+                    <div class="label">školských projektov za rok</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">50%</div>
+                    <div class="label">navrhnuté zvýšenie recyklácie do 2025</div>
+                </div>
+            </div>
+            
+            <h3>Ako sa môžete zapojiť?</h3>
+            <ol>
+                <li>Trieďte plastový odpad správne</li>
+                <li>Používajte recyklované produkty</li>
+                <li>Znižujte spotrebu jednorazových plastov</li>
+                <li>Zúčastňujte sa komunaných iniciatív</li>
+                <li>Informujte svojich priateľov a rodinu</li>
+            </ol>
+            
+            <div class="info-box">
+                <strong>Cieľ do roku 2025:</strong> Zvýšiť mieru recyklácie plastov v Malackách z 35% na aspoň 50%. To znamená bezpečnejšie životné prostredie pre budúcu generáciu.
+            </div>
+            
+            <h3>Čo môže robiť mestská samospráva?</h3>
+            <p>Mestná samospráva Malaciek má dôležitú úlohu pri riešení problému. Medzi kľúčové opatrenia patria: zavedenie nových zberných systémov, podpora lokálnych iniciátiv, vzdelávacie programy a partnerstvo s ústaveom na triedenie odpadu.</p>
+        </div>
+        
+        <!-- Kontakt -->
+        <div id="kontakt" class="content-section">
+            <h2>Kontakt a Komunikácia</h2>
+            
+            <p>Máte záujem prispievať k riešeniu problému plastového odpadu v Malackách? Kontaktujte nás cez formulár nižšie. Vaše názory a návrhy sú pre nás veľmi dôležité!</p>
+            
+            <div class="info-box">
+                <strong>Chceme počuť od vás!</strong> Ak máte otázky, návrhy alebo chcete sa zapojiť do iniciatív na zníženie plastového odpadu, vyplňte prosím kontaktný formulár.
+            </div>
+            
+            <h3>Kontaktný formulár</h3>
+            
+            <div class="success-message" id="successMessage">
+                ✓ Ďakujeme! Vaša správa bola úspešne odoslaná. Odpovíme vám čo najskôr.
+            </div>
+            
+            <form id="contactForm" onsubmit="handleSubmit(event)">
+                <div class="form-group">
+                    <label for="name">Vaše meno:</label>
+                    <input type="text" id="name" name="name" required placeholder="Napríklad: Ján Novák">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Váš e-mail:</label>
+                    <input type="email" id="email" name="email" required placeholder="vaseremail@example.com">
+                </div>
+                
+                <div class="form-group">
+                    <label for="subject">Téma:</label>
+                    <input type="text" id="subject" name="subject" required placeholder="Predmet vašej správy">
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Vaša správa:</label>
+                    <textarea id="message" name="message" required placeholder="Napíšte vašu správu..."></textarea>
+                </div>
+                
+                <button type="submit">Odoslať správu</button>
+            </form>
+            
+            <h3>Ďalšie informácie</h3>
+            
+            <div class="info-box">
+                <strong>Ako sa môžete zapojiť?</strong>
+                <ul style="margin-left: 1rem; margin-top: 0.8rem;">
+                    <li>Odoslať nám váš názor cez tento formulár</li>
+                    <li>Zúčastňovať sa komunálnych akcií</li>
+                    <li>Šíriť povedomie v komunite</li>
+                    <li>Prajať finančnú podporu iniciatívam</li>
+                </ul>
+            </div>
+            
+            <h3>Kontaktné informácie</h3>
+            <p>
+                <strong>Autor webovej stránky:</strong> Petra Kolarik<br>
+                <strong>Email projektu:</strong> plasty.malacky@example.com<br>
+                <strong>Projektu:</strong> HTML 3 - Prvky Komunikácie
+            </p>
+        </div>
+    </div>
+    
+    <footer>
+        <p><strong>Plastový odpad v Malackách 2025</strong></p>
+        <p>Autor: Petra Kolarik</p>
+        <p>Školský projekt HTML 3</p>
+        <p>&copy; 2025 Všetky práva vyhradené.</p>
+    </footer>
+    
+    <!-- Chat Box -->
+    <div class="chat-container" id="chatContainer">
+        <div class="chat-header" onclick="toggleChat()">
+            <h3>💬 Napíšte nám</h3>
+            <button class="chat-close-btn" onclick="toggleChat()">−</button>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="message bot">
+                <div class="message-content">
+                    Ahoj! 👋 Som chat asistent. Ako ti môžem pomôcť s otázkami o plastickom odpade?
+                </div>
+            </div>
+        </div>
+        <div class="chat-input-area">
+            <input 
+                type="text" 
+                class="chat-input" 
+                id="chatInput" 
+                placeholder="Napíšte správu..."
+                onkeypress="handleChatKeypress(event)"
+            >
+            <button class="chat-send-btn" onclick="sendChatMessage()">➤</button>
+        </div>
+    </div>
+    
+    <script>
+        function showSection(sectionId) {
+            // Skryť všetky sekcie
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Zmeniť aktívny odkaz
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Zobraziť zvoleňu sekciu
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Označiť aktívny odkaz
+            document.querySelector(`[data-section="${sectionId}"]`).classList.add('active');
+        }
+        
+        function handleSubmit(event) {
+            event.preventDefault();
+            
+            // Získať hodnoty z formulára
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            // Zozraziť správu o úspechu
+            const successMessage = document.getElementById('successMessage');
+            successMessage.classList.add('show');
+            
+            // Vyčistiť formulár
+            document.getElementById('contactForm').reset();
+            
+            // Skryť správu o úspechu po 5 sekundách
+            setTimeout(function() {
+                successMessage.classList.remove('show');
+            }, 5000);
+            
+            console.log('Formulár bol vyplnený:', {
+                meno: name,
+                email: email,
+                tema: subject,
+                sprava: message
+            });
+        }
+        
+        // Chat Box Functions
+        function toggleChat() {
+            const chatContainer = document.getElementById('chatContainer');
+            chatContainer.classList.toggle('closed');
+        }
+        
+        function sendChatMessage() {
+            const chatInput = document.getElementById('chatInput');
+            const message = chatInput.value.trim();
+            
+            if (message === '') return;
+            
+            const chatMessages = document.getElementById('chatMessages');
+            
+            // Pridať správu používateľa
+            const userMessage = document.createElement('div');
+            userMessage.className = 'message user';
+            userMessage.innerHTML = `<div class="message-content">${escapeHtml(message)}</div>`;
+            chatMessages.appendChild(userMessage);
+            
+            // Vyčistiť input
+            chatInput.value = '';
+            
+            // Skrolovať na dol
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            
+            // Simulovať odpoveď chatbota (po 1 sekunde)
+            setTimeout(() => {
+                const botResponse = getBotResponse(message);
+                const botMessage = document.createElement('div');
+                botMessage.className = 'message bot';
+                botMessage.innerHTML = `<div class="message-content">${botResponse}</div>`;
+                chatMessages.appendChild(botMessage);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, 500);
+        }
+        
+        function handleChatKeypress(event) {
+            if (event.key === 'Enter') {
+                sendChatMessage();
+            }
+        }
+        
+        function getBotResponse(userMessage) {
+            const lowerMessage = userMessage.toLowerCase();
+            
+            const responses = {
+                'ahoj': 'Ahoj! 👋 Ako ti môžem pomôcť?',
+                'plast': 'Plast je veľký problém! Pozri si našu stránku "Problém" kde nájdeš viac informácií.',
+                'ako': 'Viď stránku "Riešenie" - tam nájdeš, ako sa môžeš zapojiť na riešení problému!',
+                'recyklácia': '♻️ Recyklácia je kľúčová! V Malackách sa recykluje len 35% plastov, chceme zvýšiť na 50%.',
+                'malacky': 'Áno! Spracovanie plastového odpadu v Malackách je téma tejto stránky.',
+                'autorka': 'Autorkú tejto stránky je Petra Kolarik. 👩‍💻',
+                'kontakt': 'Kontakt je v sekciách "Kontakt" - tam je aj kontaktný formulár.',
+                'pozdrav': 'Ahoj! 👋 Vítam ťa na našej stránke o plastickom odpade!',
+                'ďakujem': 'Rád som pomohol! 😊 Máš ešte nejaké otázky?',
+                'áno': 'Skvelé! Čo presne ťa zaujíma? 🤔',
+                'nie': 'Ok, tak som tu ak ma neskôr potrebuješ! 👋'
+            };
+            
+            // Hľadať kľúčové slová v správe
+            for (const [key, response] of Object.entries(responses)) {
+                if (lowerMessage.includes(key)) {
+                    return response;
+                }
+            }
+            
+            // Predvolená odpoveď
+            return 'Zaujímavá otázka! 🤔 Prosím, pozri si stránky "Problém" a "Riešenie" pre viac informácií. Alebo mi napíš konkrétnu otázku!';
+        }
+        
+        function escapeHtml(text) {
+            const map = {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#039;'
+            };
+            return text.replace(/[&<>"']/g, m => map[m]);
+        }
+    </script>
+</body>
+</html>
